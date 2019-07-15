@@ -24,3 +24,4 @@ while ((cpt<10000))
   ((cpt+=1))
  done
 exit 0
+# another solution is : echo {0000..9999} 
