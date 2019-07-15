@@ -1,0 +1,26 @@
+#!/bin/bash
+cpt=0
+while ((cpt<10))
+ do
+  echo "000$cpt"
+  ((cpt+=1))
+ done
+cpt=10
+while ((cpt<100))
+ do
+  echo "00$cpt"
+  ((cpt+=1))
+ done
+cpt=100
+while ((cpt<1000))
+ do
+  echo "0$cpt"
+  ((cpt+=1))
+ done
+cpt=1000
+while ((cpt<10000))
+ do
+  echo "$cpt"
+  ((cpt+=1))
+ done
+exit 0
