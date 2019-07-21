@@ -118,9 +118,9 @@ else
   echo '###Installing php ..'
   apt-get install php -y
 fi
-pip install scapy
-pip install pcapy
-pip install pypcap
+#pip install scapy
+#pip install pcapy
+#pip install pypcap
 # ---------------------------------------------
 #
 # BACKUPING CONFIGURATIONS FILES
@@ -147,8 +147,6 @@ iptables-save > /home/pi/backup/iptables.backup
 echo "---------------------------------------------"
 echo "bypass the dhcpcd.conf ..."
 echo "---------------------------------------------"
-echo "denyinterfaces wlan0" >> /etc/dhcpcd.conf
-echo "denyinterfaces wlan0" >> /etc/dhcpcd.conf
 echo "denyinterfaces wlan1" >> /etc/dhcpcd.conf
 #########################################################
 #########################################################
@@ -157,14 +155,11 @@ echo " Now editing the ip configuration"
 echo "---------------------------------------------"
 echo "
 auto wlan1
-auto wlan0
 allow-hotplug wlan1
 iface wlan1 inet static
     address 192.168.50.1
     netmask 255.255.255.0
     network 192.168.50.0
-allow-hotplug wlan0
-iface wlan0 inet dhcp
 " > /etc/network/interfaces
 # ---------------------------------------------
 #
@@ -235,3 +230,10 @@ echo "---------------------------------------------"
 #cd MITM-HTTP/
 #python net-creds.py -i eth0
 
+# echo 0 > /proc/sys/net/ipv4/ip_forward
+# iptables-restore < /home/pi/backup/iptables.backup
+# cp /home/pi/backup/interfaces /etc/network/interfaces 
+# cp /home/pi/backup/ip_forward /proc/sys/net/ipv4/ip_forward 
+# cp /home/pi/backup/apache2.conf /etc/apache2/apache2.conf  
+# cp /home/pi/backup/dhcpcd.conf /etc/dhcpcd.conf  
+# cp /home/pi/backup/dnsmasq.conf /etc/dnsmasq.conf 
