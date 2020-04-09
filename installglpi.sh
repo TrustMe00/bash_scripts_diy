@@ -4,8 +4,8 @@
 # description : this is a script to install GLPI easly (automated install of GLPI)
 # the script install and configure apache and PHP and download the last GLPI
 # HOW TO USE : 
-# chmod +x install.sh 
-# ./install.sh
+# chmod +x installglpi.sh 
+# ./installglpi.sh
 echo "#####################################"
 echo "Define configuration"
 echo "#####################################"
