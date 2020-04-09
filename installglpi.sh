@@ -3,9 +3,14 @@
 # author : tclauzel
 # description : this is a script to install GLPI easly (automated install of GLPI)
 # the script install and configure apache and PHP and download the last GLPI
+#########################################
 # HOW TO USE : 
 # chmod +x installglpi.sh 
 # ./installglpi.sh
+# logins and passwords : 
+#########################################
+#mysql : root:root
+#glpi database : glpiuser:glpipassword
 echo "#####################################"
 echo "Define configuration"
 echo "#####################################"
