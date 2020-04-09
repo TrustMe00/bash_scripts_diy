@@ -79,6 +79,7 @@ cd /usr/src/
 wget https://github.com/glpi-project/glpi/releases/download/9.4.5/glpi-9.4.5.tgz
 tar -xvzf glpi-9.4.5.tgz -C /var/www/html
 chown -R www-data:www-data /var/www/html/glpi/
+echo '<meta http-equiv=refresh" content="0;URL=./glpi">' > /var/www/html/index.html
 echo "plase no open http://127.0.0.1/glpi/ in you borwser and finish the installation"
 echo "
      glpi/glpi pour le compte administrateur
