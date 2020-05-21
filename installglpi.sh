@@ -1,6 +1,6 @@
 #!/bin/bash
 # title : installglpi.sh
-# author : tclauzel
+# author : 
 # description : this is a script to install GLPI easly (automated install of GLPI)
 # the script install and configure apache and PHP and download the last GLPI
 #########################################
