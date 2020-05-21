@@ -1,7 +1,7 @@
 #!/bin/bash
 ########################
 # PwnBox installation script
-# author : tclauzel
+# author : 
 # date : 310519 - v1
 ########################
 # ---------------------------------------------
