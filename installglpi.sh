@@ -52,7 +52,7 @@ echo "installing dependencies"
 echo "#####################################"
 apt-get install curl wget 
 apt-get install apache2 php libapache2-mod-php -y
-apt-get install php-imap php-ldap php-curl php-xmlrpc php-gd php-mysql php-cas php-xml php-mbstring -y
+apt-get install php-imap php-ldap php-curl php-xmlrpc php-gd php-mysql php-cas php-xml php-mbstring php-intl -y
 apt-get install mariadb-server -y
 apt-get install apcupsd php-apcu -y
 echo "#####################################"
