@@ -7,19 +7,31 @@
 # HOW TO USE : 
 # chmod +x installglpi.sh 
 # ./installglpi.sh
-# logins and passwords : 
 #########################################
-#mysql : root:root
-#glpi database : glpiuser:glpipassword
 echo "#####################################"
 echo "Define configuration"
 echo "#####################################"
+dbserver='localhost'
+dbname='glpidb'
+dbuser='glpiuser'
+dbpassword='glpipassword'
 mysqlpwd='root'
+# functions
 get_latest_release() {
   curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
     grep '"tag_name":' |                                            # Get tag line
     sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
 }
+check_bin() {
+if exists $1; then
+    echo 'The program $1 exists!'
+else
+    echo 'Your system does not have the program'
+    echo '###Installing $1..'
+    apt-get install $1 -y
+fi
+}
+
 # ---------------------------------------------
 #
 # VERIFY RUN AS ROOT
@@ -30,8 +42,15 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 echo "#####################################"
+echo "check required bin"
+check_bin "git"
+check_bin "wget"
+check_bin "curl"
+echo "#####################################"
+echo "#####################################"
 echo "installing dependencies"
 echo "#####################################"
+apt-get install curl wget 
 apt-get install apache2 php libapache2-mod-php -y
 apt-get install php-imap php-ldap php-curl php-xmlrpc php-gd php-mysql php-cas php-xml php-mbstring -y
 apt-get install mariadb-server -y
@@ -89,18 +108,10 @@ echo "#####################################"
 echo "Database configuration"
 echo "#####################################"
 mysql -uroot <<MYSQL_SCRIPT
-create database glpidb;
-grant all privileges on glpidb.* to glpiuser@localhost identified by "glpipassword";
+create database $dbname;
+grant all privileges on $dbname.* to $dbuser@$dbserver identified by "$dbpassword";
 quit
 MYSQL_SCRIPT
-echo "#####################################"
-echo "database server : localhost"
-echo "database name : glpidb"
-echo "database user : glpiuser"
-echo "database password : glpipassword"
-echo "#####################################"
-echo ""
-echo ""
 echo "#####################################"
 echo "Installing GLPI"
 echo "#####################################"
